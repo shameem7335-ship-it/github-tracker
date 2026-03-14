@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>github-tracker</title>
+    <!-- daysiui and tailwind, font awsome -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body class="">
+    <section id="log-in-form" class="w-11/12 sm:w-5/12 mx-auto my-3 py-10 shadow-sm hidden">
+        <div class=" mx-auto py-1 space-y-5 flex flex-col items-center text-center">
+        <img  src="assets/github-logo.png" alt="">
+        <h1 class="text-4xl font bold">GitHub Issues Tracker</h1>
+        <p class="text-[#64748B] text-xl">Sign in to manage your issues</p>
+        </div>
+    <div id="log-in-"  class="w-11/12 mx-auto  space-y-5 flex flex-col items-start">
+       <h1 class="text-[#1F2937] text-3xl">Username</h1>
+       <input id="username" class="rounded-md w-full p-2" type="text" placeholder="Enter Username"/>
+       <h1 class="text-[#1F2937] text-3xl">Password</h1>
+       <input id="password" class="rounded-md w-full p-2" type="password" placeholder="Enter Password"/>
+       <button onclick="logIn()" id="log-in-btn" class="w-full btn btn-primary">Sign in</button>
+    </div>
+    <div class="flex flex-col items-center text-center mt-10">
+        <p  class="mb-5">Demo Credentials:</p>
+        <p class="font-bold">Username: admin</p>
+        <p class="font-bold">Password: admin123</p>
+    </div>
+</section>
+
+<!-- eikhane hidden hobe -->
+<section id="main-container" class="">
+   <header id="navbar">
+    <div class="navbar bg-base-100 shadow-sm px-15 w-full">
+  <div class="flex-1 flex items-center text-center">
+    <img class="w-10 h-10" src="assets/github-logo.png" alt="">
+    <a class="btn btn-ghost text-xl">Github issue tracker</a>
+  </div>
+  <div class="flex gap-2">
+    <input type="text" placeholder="Search issue" class="input input-bordered w-24 md:w-auto" />
+    <div class="dropdown dropdown-end">
+         <button class="btn btn-primary text-white">+ New Issue</button>
+      </div>
+  </div>
+</div>
+   </header>
+   <div class="flex justify-center">
+   <div class=" flex  gap-3 w-10/12 shadow-sm mt-5 p-8">
+    <button onclick="allCard()" class="active-btn btn  p-5">ALl</button>
+    <button onclick="openCard()" class="active-btn btn p-5">Open</button>
+    <button onclick="closeCard()" class="active-btn btn p-5">Closed</button>
+   </div>
+   
+   </div>
+     <div class="flex justify-center">
+        <div class="flex justify-between w-10/12 shadow-sm mt-5 p-8">
+    <div class="flex gap-3">
+        <img src="assets/Aperture.png" alt="">
+        <div>
+            <h1 class="font-bold">50 Issues</h1>
+            <p class="text-[#64748B]">Track and manage your project issues</p>
+        </div>
+    </div>
+    <div class="flex gap-3">
+       <div class="flex gap-1 items-center text-center"><img class="p-2" src="assets/Open-Status.png" alt="">Open</div>
+       <div class="flex gap-1 items-center text-center"><img class="p-2" src="assets/Closed- Status .png" alt="">Closed</div>
+    </div>
+   </div>
+     </div>
+     <!-- ----api ---- -->
+      <!-- 1. all card -->
+    
+        
+        <div id="all-card" class="w-10/12 shadow-sm grid grid-cols-1 sm:grid-cols-4 gap-3 mx-auto">
+
+        </div>
+         
+    
+
+     <!-- 2.open card -->
+      <div id="open-card" class="flex justify-center hidden">
+          <div class="w-10/12 shadow-sm ">
+              <p class="">open-card</p>
+
+          </div>
+      </div>
+
+      <!-- 3.close card -->
+       <div id="closed-card" class="flex justify-center hidden">
+           <div class="w-10/12 shadow-sm">
+        <p>close card</p>
+
+        </div>
+       </div>
+</section>
+
+<script src="index.js"></script>
+</body>
+</html>
