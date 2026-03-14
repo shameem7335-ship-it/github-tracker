@@ -60,7 +60,7 @@
     <div class="flex gap-3">
         <img src="assets/Aperture.png" alt="">
         <div>
-            <h1 class="font-bold">50 Issues</h1>
+            <h1 class="font-bold"><spann id="card-count"></spann> Issues</h1>
             <p class="text-[#64748B]">Track and manage your project issues</p>
         </div>
     </div>
@@ -81,19 +81,13 @@
     
 
      <!-- 2.open card -->
-      <div id="open-card" class="flex justify-center hidden">
-          <div class="w-10/12 shadow-sm ">
-              <p class="">open-card</p>
-
-          </div>
+      <div id="open-card" class="w-10/12 shadow-sm grid grid-cols-1 sm:grid-cols-4 gap-3 mx-auto">
+              
       </div>
 
       <!-- 3.close card -->
-       <div id="closed-card" class="flex justify-center hidden">
-           <div class="w-10/12 shadow-sm">
-        <p>close card</p>
+       <div id="closed-card" class="w-10/12 shadow-sm grid grid-cols-1 sm:grid-cols-4 gap-3 mx-auto">
 
-        </div>
        </div>
 </section>
 
