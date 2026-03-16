@@ -44,6 +44,15 @@ allBtn.forEach(btn=>{
 })
 
 
+//---- manage spinner -----
+const manageSpiner = (stats)=>{
+    const spiner =document.getElementById('spiiner');
+    if(stats==true){
+        spiner.classList.remove('hidden')
+    }
+    else{spiner.classList.add('hidden')}
+}
+
 //--------- card style------
     const labels = (arr)=>{
 
@@ -117,12 +126,15 @@ const allCard = () =>{
     closedCardcontainer.classList.add('hidden')
 
   
-
+    manageSpiner(true);
     // fetch for all card
     const urlAll = 'https://phi-lab-server.vercel.app/api/v1/lab/issues'
     fetch(urlAll)
     .then(response => response.json())
-    .then(allData => displayAll(allData.data))
+    .then(allData =>{
+        displayAll(allData.data)
+         manageSpiner(false);
+    })
 }   
 
 // displY all card in all card btn
@@ -158,12 +170,15 @@ const openCard = () =>{
     closedCardcontainer.classList.add('hidden')
     openCardcontainer.classList.remove('hidden')
 
-
+           manageSpiner(true);
     // fetch for open card
      const urlOpen ='https://phi-lab-server.vercel.app/api/v1/lab/issues'
      fetch(urlOpen)
      .then(res => res.json())
-     .then(opendata => displayOpencards(opendata.data))}
+     .then(opendata =>{
+          displayOpencards(opendata.data)
+         manageSpiner(false);})
+        }
 
 
      //  display open status card in open button
@@ -201,11 +216,14 @@ const closeCard = () =>{
    openCardcontainer.classList.add('hidden')
    closedCardcontainer.classList.remove('hidden')
 
+    manageSpiner(true);
     //   fetch for close card
     const urlClosed ='https://phi-lab-server.vercel.app/api/v1/lab/issues';
     fetch(urlClosed)
     .then(res => res.json())
-    .then(data=> displayClosedCards(data.data))
+    .then(data=> {displayClosedCards(data.data)
+         manageSpiner(false);
+    })
  }
 
 //  display close cards in closed button
@@ -258,7 +276,7 @@ const loadDetals=(id)=>{
          <div class="text[#64748B]">${card.description}</div>
          <div class="py-2 px-4 flex  gap-30 bg-[#f1f2f3] rounded-md">
          <div><p class="text[#64748B]">assignee</p><p>${card.assignee ? card.assignee : `unknown`}</p></div>
-         <div><p class="text[#64748B]">priority</p><p class="${priority}  px-2 py-1 rounded-md"> ${card.priority}</p<</div>
+         <div><p class="text[#64748B]">priority</p><p class="${priority}  px-2 py-1 rounded-md"> ${card.priority}</p></div>
          </div>
        </div>
        `
@@ -291,3 +309,5 @@ const loadDetals=(id)=>{
 
 
 allCard();
+
+
