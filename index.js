@@ -31,6 +31,8 @@ else{
 
 
 // active button
+
+
 const allBtn = document.querySelectorAll('.active-btn');
 
 allBtn.forEach(btn=>{
@@ -42,6 +44,68 @@ allBtn.forEach(btn=>{
 })
 
 
+//--------- card style------
+    const labels = (arr)=>{
+
+           const createLabels = arr.map((element)=>{
+                   let labelbg="";
+                   let icon="";
+    if(element==='bug'){
+        labelbg='py-1 px-3 rounded-sm text-[#EF4444] bg-[#FECACA]'
+    icon = '<i class="fa-solid fa-bug"></i>'}
+    else if(element==='help wanted'){
+        labelbg='py-1 px-3 rounded-sm text-[#D97706] bg-[#FDE68A]'
+    icon = '<i class="fa-solid fa-life-ring"></i>'}
+    else if(element==='enhancement'){
+        labelbg='py-1 px-3 rounded-sm text-[#00A96E] bg-[#BBF7D0]'
+        icon = '<i class="fa-solid fa-wand-magic-sparkles"></i>'
+    }
+    else if(element==='good first issue'){
+        labelbg='py-1 px-3 rounded-sm text-[#EF4444] bg-[#FECACA]';
+    icon = '<i class="fa-solid fa-box-tissue"></i>'}
+    else if(element==='documentation'){
+        labelbg='py-1 px-3 rounded-sm text-[#D97706] bg-[#FDE68A]';
+    icon='<i class="fa-solid fa-book-medical"></i>'};
+        return `<span class="${labelbg} inline-flex items-center whitespace-nowrap  gap-1"><span class="align-middle">${icon}</span> ${element}</span>`});
+           return createLabels.join(' ')
+     }
+
+const statusStyle=(card)=>{
+        if(card.status==='open'){
+       return ' border-t-6 border-t-[#00A96E] ';}
+       else if(card.status==='closed'){
+       return 'border-t-6 border-t-[#A855F7]';
+    }}
+    
+    const priorityStyle=(card)=>{
+        if(card.priority==='high'){
+            return 'text-[#EF4444] bg-[#FEECEC]'}
+            else if(card.priority==='medium'){
+                return 'text-[#F59E0B] bg-[#FFF6D1]'}
+                else if(card.priority==='low'){
+                    return 'flex items-center text-center text-[#9CA3AF] bg-[#EEEFF2]'}
+                }
+                
+       const newCard=document.createElement('div')
+        const cardStyle =(card, statuss, priority)=>
+         ` <div class="">
+           <div class="${statuss}  p-5 shadow-sm space-y-5 rounded-t">
+                <div class="flex justify-between text-center items-center">
+               <img src="${card.status==='open'?'assets/Open-Status.png' :'assets/Closed- Status .png' }"></img>
+                    <p class="${priority} rounded-full px-4 py-1 ">${card.priority}</p>
+                </div>
+                <h1 class="font-bold">${card.title}</h1>
+                <p class="text-[#64748b]">${card.description}</p>
+                <div class="flex gap-5">
+                <div class="flex gap-3">${labels(card.labels)}</div>
+                </div>
+          </div>
+          <div class="p-5 shadow-sm space-y-3">
+              <p class="text-[#64748b]">#1 by john_doe</p>
+              <p class="text-[#64748b]">1/15/2024</p>
+          </div>
+    
+           </div> `
 
 
 // all card button js
@@ -66,76 +130,21 @@ const displayAll =(cards) => {
     // console.log(cards)
     //    1. get the container
     const allCardcontainer = document.getElementById('all-card');
+    allCardcontainer.innerHTML="";
 
     //2 get in every loop
     for(const card of cards){
-        console.log(card);
+        // console.log(card);
         // 2.1 create elemenet 
     const newCard = document.createElement('div');
-
-    let statuss='';
-    if(card.status==='open'){
-        statuss=' border-t-6 border-t-[#00A96E] '}
-    else if(card.status==='closed'){
-        statuss='border-t-6 border-t-[#A855F7]'
-    }
-    //   ---prioroty text bg color function
-    let priority="";
-    if(card.priority==='high'){
-        priority='text-[#EF4444] bg-[#FEECEC]'}
-    else if(card.priority==='medium'){
-        priority='text-[#F59E0B] bg-[#FFF6D1]'}
-    else if(card.priority==='low'){
-        priority='flex items-center text-center text-[#9CA3AF] bg-[#EEEFF2]'}
-
-
-    //   ------level text and bg color function
-     const labels = (arr)=>{
-
-           const createLabels = arr.map((element)=>{
-                   let labelbg="";
-    if(element==='bug'){
-        labelbg='py-1 px-3 rounded-sm text-[#EF4444] bg-[#FECACA]'
-    icon = '<i class="fa-solid fa-bug"></i>'}
-    else if(element==='help wanted'){
-        labelbg='py-1 px-3 rounded-sm text-[#D97706] bg-[#FDE68A]'
-    icon = '<i class="fa-solid fa-life-ring"></i>'}
-    else if(element==='enhancement'){
-        labelbg='py-1 px-3 rounded-sm text-[#00A96E] bg-[#BBF7D0]'
-        icon = '<i class="fa-solid fa-wand-magic-sparkles"></i>'
-    }
-    else if(element==='good first issue'){
-        labelbg='py-1 px-3 rounded-sm text-[#EF4444] bg-[#FECACA]';
-    icon = '<i class="fa-solid fa-box-tissue"></i>'}
-    else if(element==='documentation'){
-        labelbg='py-1 px-3 rounded-sm text-[#D97706] bg-[#FDE68A]';
-    icon='<i class="fa-solid fa-book-medical"></i>'}
-
-            
-           return `<span class="${labelbg} inline-flex items-center whitespace-nowrap  gap-1"><span class="align-middle">${icon}</span> ${element}</span>`});
-           return createLabels.join(' ')
-     }
-
-// --------2.2 new card inner html set
-    newCard.innerHTML=
-        ` <div class="">
-           <div class=" ${statuss} p-5 shadow-sm space-y-5 rounded-t">
-                <div class="flex justify-between text-center items-center">
-               <img src="${card.status==='open'?'assets/Open-Status.png' :'assets/Closed- Status .png' }"></img>
-                    <p class="${priority} rounded-full px-4 py-1 ">${card.priority}</p>
-                </div>
-                <h1 class="font-bold">${card.title}</h1>
-                <p class="text-[#64748b]">${card.description}</p>
-                <div class="flex gap-5">
-                <div class="flex gap-3">${labels(card.labels)}</div>
-                </div>
-          </div>
-          <div class="p-5 shadow-sm space-y-3">
-              <p class="text-[#64748b]">#1 by john_doe</p>
-              <p class="text-[#64748b]">1/15/2024</p>
-          </div>
-    
-           </div> `
+    newCard.addEventListener('click', ()=>{
+        loadDetals(card.id);
+    })
+    // ----
+    const status=statusStyle(card);
+    const priority= priorityStyle(card);
+    newCard.innerHTML=`${cardStyle(card, status, priority)}`
+    // -----
     // 3.append element to container
     allCardcontainer.appendChild(newCard)
     }
@@ -161,71 +170,19 @@ const openCard = () =>{
     const displayOpencards=(cards)=>{
         // get container
         const openCardcontainer = document.getElementById('open-card');
+        openCardcontainer.innerHTML="";
         //  create element  
        cards.forEach(card=>{
         if(card.status==='open'){
         const newCard=document.createElement('div');
-
-        let statuss='';
-        if(card.status==='open'){
-        statuss=' border-t-6 border-t-[#00A96E] '}
-       else if(card.status==='closed'){
-        statuss='border-t-6 border-t-[#A855F7]'
-    }
-    //   ---prioroty text bg color function
-    let priority="";
-    if(card.priority==='high'){
-        priority='text-[#EF4444] bg-[#FEECEC]'}
-    else if(card.priority==='medium'){
-        priority='text-[#F59E0B] bg-[#FFF6D1]'}
-    else if(card.priority==='low'){
-        priority='flex items-center text-center text-[#9CA3AF] bg-[#EEEFF2]'}
-        //   ------level text and bg color function
-     const labels = (arr)=>{
-
-           const createLabels = arr.map((element)=>{
-                   let labelbg="";
-    if(element==='bug'){
-        labelbg='py-1 px-3 rounded-sm text-[#EF4444] bg-[#FECACA]'
-    icon = '<i class="fa-solid fa-bug"></i>'}
-    else if(element==='help wanted'){
-        labelbg='py-1 px-3 rounded-sm text-[#D97706] bg-[#FDE68A]'
-    icon = '<i class="fa-solid fa-life-ring"></i>'}
-    else if(element==='enhancement'){
-        labelbg='py-1 px-3 rounded-sm text-[#00A96E] bg-[#BBF7D0]'
-        icon = '<i class="fa-solid fa-wand-magic-sparkles"></i>'
-    }
-    else if(element==='good first issue'){
-        labelbg='py-1 px-3 rounded-sm text-[#EF4444] bg-[#FECACA]';
-    icon = '<i class="fa-solid fa-box-tissue"></i>'}
-    else if(element==='documentation'){
-        labelbg='py-1 px-3 rounded-sm text-[#D97706] bg-[#FDE68A]';
-    icon='<i class="fa-solid fa-book-medical"></i>'}
-
-            
-           return `<span class="${labelbg} inline-flex items-center whitespace-nowrap  gap-1"><span class="align-middle">${icon}</span> ${element}</span>`});
-           return createLabels.join(' ')
-     }
-        // new card inner html set
-        newCard.innerHTML= 
-         ` <div class="">
-           <div class="${statuss}  p-5 shadow-sm space-y-5 rounded-t">
-                <div class="flex justify-between text-center items-center">
-               <img src="${card.status==='open'?'assets/Open-Status.png' :'assets/Closed- Status .png' }"></img>
-                    <p class="${priority} rounded-full px-4 py-1 ">${card.priority}</p>
-                </div>
-                <h1 class="font-bold">${card.title}</h1>
-                <p class="text-[#64748b]">${card.description}</p>
-                <div class="flex gap-5">
-                <div class="flex gap-3">${labels(card.labels)}</div>
-                </div>
-          </div>
-          <div class="p-5 shadow-sm space-y-3">
-              <p class="text-[#64748b]">#1 by john_doe</p>
-              <p class="text-[#64748b]">1/15/2024</p>
-          </div>
-    
-           </div> `
+        newCard.addEventListener('click',()=>{
+           loadDetals(card.id);
+        })
+       // -------
+       const status=statusStyle(card);
+       const priority= priorityStyle(card);
+    newCard.innerHTML=`${cardStyle(card, status, priority)}`
+       //  ------  
 
         // append elemnt to container
         openCardcontainer.appendChild(newCard);
@@ -255,71 +212,20 @@ const closeCard = () =>{
 const displayClosedCards=(cards)=>{
     //1. get container
 const closedCardcontainer = document.getElementById('closed-card');
+closedCardcontainer.innerHTML="";
     // 2. create elemnt for every card
 cards.forEach(card=>{
     if(card.status==='closed'){
     const newCard = document.createElement('div');
-
-       let statuss='';
-        if(card.status==='open'){
-        statuss=' border-t-6 border-t-[#00A96E] '}
-       else if(card.status==='closed'){
-        statuss='border-t-6 border-t-[#A855F7]'
-    }
-    //   ---prioroty text bg color function
-    let priority="";
-    if(card.priority==='high'){
-        priority='text-[#EF4444] bg-[#FEECEC]'}
-    else if(card.priority==='medium'){
-        priority='text-[#F59E0B] bg-[#FFF6D1]'}
-    else if(card.priority==='low'){
-        priority='flex items-center text-center text-[#9CA3AF] bg-[#EEEFF2]'};
-        //   ------level text and bg color function
-     const labels = (arr)=>{
-
-           const createLabels = arr.map((element)=>{
-                   let labelbg="";
-    if(element==='bug'){
-        labelbg='py-1 px-3 rounded-sm text-[#EF4444] bg-[#FECACA]'
-    icon = '<i class="fa-solid fa-bug"></i>'}
-    else if(element==='help wanted'){
-        labelbg='py-1 px-3 rounded-sm text-[#D97706] bg-[#FDE68A]'
-    icon = '<i class="fa-solid fa-life-ring"></i>'}
-    else if(element==='enhancement'){
-        labelbg='py-1 px-3 rounded-sm text-[#00A96E] bg-[#BBF7D0]'
-        icon = '<i class="fa-solid fa-wand-magic-sparkles"></i>'
-    }
-    else if(element==='good first issue'){
-        labelbg='py-1 px-3 rounded-sm text-[#EF4444] bg-[#FECACA]';
-    icon = '<i class="fa-solid fa-box-tissue"></i>'}
-    else if(element==='documentation'){
-        labelbg='py-1 px-3 rounded-sm text-[#D97706] bg-[#FDE68A]';
-    icon='<i class="fa-solid fa-book-medical"></i>'}
-
-            
-           return `<span class="${labelbg} inline-flex items-center whitespace-nowrap  gap-1"><span class="align-middle">${icon}</span> ${element}</span>`});
-           return createLabels.join(' ')
-     }
-    // new card inner html set
-    newCard.innerHTML=
-     ` <div class="">
-           <div class="${statuss}  p-5 shadow-sm space-y-5 rounded-t">
-                <div class="flex justify-between text-center items-center">
-               <img src="${card.status==='open'?'assets/Open-Status.png' :'assets/Closed- Status .png' }"></img>
-                    <p class="${priority} rounded-full px-4 py-1 ">${card.priority}</p>
-                </div>
-                <h1 class="font-bold">${card.title}</h1>
-                <p class="text-[#64748b]">${card.description}</p>
-                <div class="flex gap-5">
-                <div class="flex gap-3">${labels(card.labels)}</div>
-                </div>
-          </div>
-          <div class="p-5 shadow-sm space-y-3">
-              <p class="text-[#64748b]">#1 by john_doe</p>
-              <p class="text-[#64748b]">1/15/2024</p>
-          </div>
-    
-           </div> `
+    newCard.addEventListener('click',()=>{
+       loadDetals(card.id);
+    })
+    // -------
+    const status=statusStyle(card);
+    const priority= priorityStyle(card);
+    newCard.innerHTML=`${cardStyle(card, status, priority)}`
+    // --------
+      
     // append to the container
 
     closedCardcontainer.appendChild(newCard);
@@ -329,5 +235,45 @@ cards.forEach(card=>{
        cardCount.innerText=closedCardcontainer.children.length;
 
 }
+// -------onclick modal---------
+const loadDetals=(id)=>{
+    const url =`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`;
+    fetch(url)
+    .then(res=>res.json())
+    .then(data=> displayModal(data.data))
+   };
+
+   const displayModal=(card)=>{
+    console.log(card);
+    const modalBox=document.getElementById('modalbox');
+  
+    // -----
+      const status=statusStyle(card);
+       const priority= priorityStyle(card);
+       modalBox.innerHTML=`
+       <div class="space-y-8 ">
+       <h1 class="text-2xl font-bold">${card.title}</h1>
+        <div class="flex space-x-2"><p class="rounded-md p-1 text-white ${card.status==='open'?'bg-[#00A96E]':'bg-[#A855F7]'}">${card.status}</p><p>${card.assignee ? `${card.status} by ${card.assignee}` :` ${card.status} by unknown`}</p> <p>${card.updatedAt}</p></div>
+         <div class=" flex gap-3">${labels(card.labels)}</div>
+         <div class="text[#64748B]">${card.description}</div>
+         <div class="py-2 px-4 flex  gap-30 bg-[#f1f2f3] rounded-md">
+         <div><p class="text[#64748B]">assignee</p><p>${card.assignee ? card.assignee : `unknown`}</p></div>
+         <div><p class="text[#64748B]">priority</p><p class="${priority}  px-2 py-1 rounded-md"> ${card.priority}</p<</div>
+         </div>
+       </div>
+       `
+    // -----
+    
+    document.getElementById('my_modal_5').showModal();
+
+   }
+
+      //    -----search issue-------
+      const searchInput = document.getElementById('search-input');
+      const searchbtn = document.getElementById('search-btn');
+      const search=(word)=>{
+        console.log(searchInput.value.trim().toLowerCase())
+      }
+
 
 allCard();

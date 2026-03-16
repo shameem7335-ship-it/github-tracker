@@ -33,23 +33,23 @@
 
 <!-- eikhane hidden hobe -->
 <section id="main-container" class="">
-   <header id="navbar">
+   <header id="navbar" class="">
     <div class="navbar bg-base-100 shadow-sm px-15 w-full">
   <div class="flex-1 flex items-center text-center">
     <img class="w-10 h-10" src="assets/github-logo.png" alt="">
     <a class="btn btn-ghost text-xl">Github issue tracker</a>
   </div>
   <div class="flex gap-2">
-    <input type="text" placeholder="Search issue" class="input input-bordered w-24 md:w-auto" />
+    <input id="search-input" type="text" placeholder="Search issue" class="input input-bordered w-24 md:w-auto" />
     <div class="dropdown dropdown-end">
-         <button class="btn btn-primary text-white">+ New Issue</button>
+         <button id="search-btn" onclick="search()" class="btn btn-primary text-white">+ New Issue</button>
       </div>
   </div>
 </div>
    </header>
    <div class="flex justify-center">
    <div class=" flex  gap-3 w-10/12 shadow-sm mt-5 p-8">
-    <button onclick="allCard()" class="active-btn btn  p-5">ALl</button>
+    <button onclick="allCard()" id="all-btn" class="active-btn btn btn-primary p-5">ALl</button>
     <button onclick="openCard()" class="active-btn btn p-5">Open</button>
     <button onclick="closeCard()" class="active-btn btn p-5">Closed</button>
    </div>
@@ -60,7 +60,7 @@
     <div class="flex gap-3">
         <img src="assets/Aperture.png" alt="">
         <div>
-            <h1 class="font-bold"><spann id="card-count"></spann> Issues</h1>
+            <h1 class="font-bold"><span id="card-count"></span> Issues</h1>
             <p class="text-[#64748B]">Track and manage your project issues</p>
         </div>
     </div>
@@ -90,6 +90,20 @@
 
        </div>
 </section>
+
+<!-- Open the modal using ID.showModal() method -->
+<button class="btn" onclick="my_modal_5.showModal()">open modal</button>
+<dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+  <div  class="modal-box">
+    <div id="modalbox"></div>
+    <div class="modal-action">
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn btn-primary">Close</button>
+      </form>
+    </div>
+  </div>
+</dialog>
 
 <script src="index.js"></script>
 </body>
