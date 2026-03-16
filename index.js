@@ -272,7 +272,21 @@ const loadDetals=(id)=>{
       const searchInput = document.getElementById('search-input');
       const searchbtn = document.getElementById('search-btn');
       const search=(word)=>{
-        console.log(searchInput.value.trim().toLowerCase())
+          const searchWord =(searchInput.value.trim().toLowerCase());
+
+        fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues')
+        .then(res=>res.json())
+        .then(data=>{
+            const allwords= data.data;
+            const filterWords=allwords.filter((word)=>
+            word.title.toLowerCase().includes(searchWord));
+
+             displayAll(filterWords);
+
+            allBtn.forEach(button=>{button.classList.remove('btn-primary')})
+         searchInput.value=""
+        })
+             
       }
 
 
