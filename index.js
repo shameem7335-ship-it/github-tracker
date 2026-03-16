@@ -290,8 +290,9 @@ const loadDetals=(id)=>{
       const searchInput = document.getElementById('search-input');
       const searchbtn = document.getElementById('search-btn');
       const search=(word)=>{
+        manageSpiner(true);
           const searchWord =(searchInput.value.trim().toLowerCase());
-
+            
         fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues')
         .then(res=>res.json())
         .then(data=>{
@@ -303,6 +304,7 @@ const loadDetals=(id)=>{
 
             allBtn.forEach(button=>{button.classList.remove('btn-primary')})
          searchInput.value=""
+         manageSpiner(false);
         })
              
       }
