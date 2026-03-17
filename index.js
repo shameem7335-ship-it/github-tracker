@@ -105,8 +105,8 @@ const statusStyle=(card)=>{
                 </div>
                 <h1 class="font-bold">${card.title}</h1>
                 <p class="text-[#64748b]">${card.description}</p>
-                <div class="flex gap-5">
-                <div class="flex gap-3">${labels(card.labels)}</div>
+                <div class="flex gap-5 flex-wrap w-10/12 max-w-full">
+                <div class="flex gap-3 flex-wrap ">${labels(card.labels)}</div>
                 </div>
           </div>
           <div class="p-5 shadow-sm space-y-3">
